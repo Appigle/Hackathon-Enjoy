@@ -4,7 +4,7 @@ import Header from '@/src/components/Header';
 
 export default function SubmitPage() {
   return (
-    <Container maxWidth="sm" className="space-y-8 py-12">
+    <Container maxWidth="md" className="space-y-8 py-12">
       <Header />
       <Paper elevation={0} className="space-y-4 rounded-2xl border border-slate-200 p-8">
         <Typography variant="h4">Share your experience</Typography>

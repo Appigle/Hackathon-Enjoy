@@ -15,7 +15,7 @@ export default function Header() {
             Dashboard
           </Button>
           <Button component={Link} href="/submit" variant="contained">
-            Submit
+            Submit Feedback
           </Button>
            <Button component={Link} href="/form" variant="contained">
             Submit URL

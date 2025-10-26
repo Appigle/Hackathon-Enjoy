@@ -71,7 +71,7 @@ export default function SurveyForm() {
         {status === 'success' && <Alert severity="success">Response captured!</Alert>}
         {status === 'error' && <Alert severity="error">Something went wrong.</Alert>}
         <Button type="submit" variant="contained" disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting…' : 'Submit feedback'}
+          {isSubmitting ? 'Submitting…' : 'Submit'}
         </Button>
       </Stack>
     </form>
