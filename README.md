@@ -217,6 +217,42 @@ Render any registered React Email template and dispatch it via SendGrid.
 { "ok": true, "data": { "id": "sg-message-id", "simulated": false } }
 ```
 
+### `POST /api/juggernaut/run`
+
+Start a Juggernaut process. Defaults to the sample process ID when `processId` is omitted.
+
+**Body**
+
+```json
+{
+  "processId": "6838b06e3e420c278bfe5a42",
+  "inputs": { "ticketId": "CX-1001" },
+  "metadata": { "name": "Dashboard Trigger", "description": "Manual test" }
+}
+```
+
+**Response**
+
+```json
+{ "ok": true, "data": { "referenceId": "ref_123", "status": "queued" } }
+```
+
+### `POST /api/juggernaut/poll`
+
+Poll for results using the reference ID returned from the run endpoint.
+
+**Body**
+
+```json
+{ "referenceId": "ref_123" }
+```
+
+**Response**
+
+```json
+{ "ok": true, "data": { "status": "completed", "result": {...} } }
+```
+
 ---
 
 ## 🧩 Code Snippets (Core Pieces)

@@ -9,6 +9,7 @@ import TopicBar from '@/src/components/TopicBar';
 import SentimentLine from '@/src/components/SentimentLine';
 import FollowupDrawer from '@/src/components/FollowupDrawer';
 import { useInsights } from '@/src/hooks/useInsights';
+import { testProcessId } from '@/src/services/juggernaut';
 
 export default function DashboardPage() {
   const { data, isLoading } = useInsights();
@@ -62,6 +63,17 @@ export default function DashboardPage() {
         </Typography>
         <Button component={Link} href="/email-preview" variant="contained">
           Open email previewer
+        </Button>
+      </Paper>
+      <Paper className="rounded-2xl border border-dashed border-amber-300 p-6" elevation={0}>
+        <Typography variant="h6" gutterBottom>
+          Test Juggernaut process
+        </Typography>
+        <Typography color="text.secondary" className="mb-4">
+          Trigger the sample process ({testProcessId}) and poll for results without leaving the dashboard.
+        </Typography>
+        <Button component={Link} href="/juggernaut-test" variant="outlined">
+          Open Juggernaut console
         </Button>
       </Paper>
       <FollowupDrawer open={!!drawerEmail} email={drawerEmail} onClose={() => setDrawerEmail(null)} />
