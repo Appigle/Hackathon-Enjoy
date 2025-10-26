@@ -22,6 +22,9 @@ export default function HomePage() {
             <Button component={Link} href="/submit" variant="outlined">
               Submit Feedback
             </Button>
+            <Button component={Link} href="/form" variant="outlined">
+              Submit URL
+            </Button>
           </Stack>
         </div>
       </Stack>

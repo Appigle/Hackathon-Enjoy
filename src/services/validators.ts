@@ -6,7 +6,9 @@ export const SurveySchema = z.object({
   bodyText: z.string().min(10),
   nps: z.number().min(0).max(10)
 });
-
+export const UrlSchema=z.object({
+  url:z.string().min(2)
+})
 export const FollowUpSchema = z.object({
   to: z.string().email(),
   subject: z.string().min(3),
@@ -19,3 +21,4 @@ export const FollowUpSchema = z.object({
 
 export type SurveyInput = z.infer<typeof SurveySchema>;
 export type FollowUpInput = z.infer<typeof FollowUpSchema>;
+export type UrlInput=z.infer<typeof UrlSchema>

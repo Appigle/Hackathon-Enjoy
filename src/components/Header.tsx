@@ -17,6 +17,9 @@ export default function Header() {
           <Button component={Link} href="/submit" variant="contained">
             Submit
           </Button>
+           <Button component={Link} href="/form" variant="contained">
+            Submit URL
+          </Button>
         </div>
       </Toolbar>
     </AppBar>
