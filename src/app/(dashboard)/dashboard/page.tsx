@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Container, Grid, Paper, Typography, List, ListItemButton, ListItemText } from '@mui/material';
+import Link from 'next/link';
+import { Container, Grid, Paper, Typography, List, ListItemButton, ListItemText, Button } from '@mui/material';
 import Header from '@/src/components/Header';
 import KPICards from '@/src/components/KPICards';
 import TopicBar from '@/src/components/TopicBar';
@@ -50,6 +51,18 @@ export default function DashboardPage() {
             </ListItemButton>
           ))}
         </List>
+      </Paper>
+      <Paper className="rounded-2xl border border-dashed border-slate-300 p-6" elevation={0}>
+        <Typography variant="h6" gutterBottom>
+          Preview email templates
+        </Typography>
+        <Typography color="text.secondary" className="mb-4">
+          Need to fine-tune copy before sending? Jump into the dedicated previewer to render any React Email
+          template with real props.
+        </Typography>
+        <Button component={Link} href="/email-preview" variant="contained">
+          Open email previewer
+        </Button>
       </Paper>
       <FollowupDrawer open={!!drawerEmail} email={drawerEmail} onClose={() => setDrawerEmail(null)} />
     </Container>
