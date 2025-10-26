@@ -1,25 +1,39 @@
 import sgMail from '@sendgrid/mail';
+import React, { ComponentType } from 'react';
 import { render } from '@react-email/render';
 import FollowUpEmail from '@/emails/FollowUpEmail';
+import FollowUpProcessing from '@/emails/FollowUpProcessing';
+import NegativeFeedbackApology from '@/emails/NegativeFeedbackApology';
+import NegativeFeedbackOpsAlert from '@/emails/NegativeFeedbackOpsAlert';
+import WelcomeEmail from '@/emails/WelcomeEmail';
 
 const apiKey = process.env.SENDGRID_API_KEY;
 const fromAddress = process.env.EMAIL_FROM || 'PulsePilot <no-reply@example.com>';
-
-import React from 'react';
 
 if (apiKey) {
   sgMail.setApiKey(apiKey);
 }
 
-export async function sendFollowUpEmail(opts: {
+export const templateRegistry = {
+  followUp: FollowUpEmail,
+  followUpProcessing: FollowUpProcessing,
+  apology: NegativeFeedbackApology,
+  welcome: WelcomeEmail,
+  opsAlert: NegativeFeedbackOpsAlert
+} satisfies Record<string, ComponentType<any>>;
+
+export type TemplateId = keyof typeof templateRegistry;
+
+export async function sendEmailTemplate(opts: {
   to: string;
   subject: string;
-  templateProps: React.ComponentProps<typeof FollowUpEmail>;
+  template: TemplateId;
+  props: Record<string, unknown>;
 }) {
-  const html = render(React.createElement(FollowUpEmail, opts.templateProps));
-  const text = `Hi ${opts.templateProps.greetingName ?? 'there'},\n\n${opts.templateProps.summary}\n\nOpen: ${
-    opts.templateProps.ctaUrl
-  }`;
+  const Component = templateRegistry[opts.template];
+  const element = React.createElement(Component, opts.props);
+  const html = render(element, { pretty: true });
+  const text = `Preview of ${opts.template}`;
 
   if (!apiKey) {
     console.warn('[email] SENDGRID_API_KEY missing — simulate send');
@@ -35,4 +49,12 @@ export async function sendFollowUpEmail(opts: {
   });
 
   return { id: res.headers['x-message-id'] ?? 'unknown', simulated: false };
+}
+
+export async function sendFollowUpEmail(opts: {
+  to: string;
+  subject: string;
+  templateProps: React.ComponentProps<typeof FollowUpEmail>;
+}) {
+  return sendEmailTemplate({ to: opts.to, subject: opts.subject, template: 'followUp', props: opts.templateProps });
 }

@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  important: true,
   content: ['./src/**/*.{ts,tsx}', './emails/**/*.{ts,tsx}', './app/**/*.{ts,tsx}'],
   theme: {
     extend: {

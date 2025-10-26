@@ -193,6 +193,30 @@ Send (or simulate-send) a follow-up email.
 { "ok": true, "data": { "id": "sg-message-id", "simulated": false } }
 ```
 
+### `POST /api/send-template`
+
+Render any registered React Email template and dispatch it via SendGrid.
+
+**Body**
+
+```json
+{
+  "to": "team@example.com",
+  "subject": "[Preview] Ops Alert",
+  "template": "opsAlert",
+  "props": {
+    "ticketId": "CX-7719",
+    "customerEmail": "alex@example.com"
+  }
+}
+```
+
+**Response**
+
+```json
+{ "ok": true, "data": { "id": "sg-message-id", "simulated": false } }
+```
+
 ---
 
 ## 🧩 Code Snippets (Core Pieces)
@@ -365,4 +389,3 @@ export default {
 ## 📄 License
 
 MIT
-
